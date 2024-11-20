@@ -1,0 +1,55 @@
+.navbar {
+    background-color: #ffffff !important; 
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.navbar-nav {
+    flex-direction: row;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.img  {
+    width: 100px;
+}
+
+.nav-bar.liens {
+    display: flex;
+    gap: 20px; 
+    margin-left: 20px; 
+}
+
+.nav-bar.liens a {
+    color: #333;
+    text-decoration: none; 
+    font-size: 1.2rem; 
+    font-weight: bold;
+    cursor: pointer; 
+}
+
+.nav-bar.login {
+    display: flex;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.nav-bar.login a {
+    color: #333;
+    text-decoration: none; 
+    font-size: 1.2rem; 
+    font-weight: bold;
+    cursor: pointer; 
+}

@@ -1,0 +1,44 @@
+<div class="book-detail-container">
+    @if (audioBook) {
+      <div class="book-content">
+        <div class="book-header">
+          <button class="back-button" (click)="navigateToList()">
+            ← Retour à la bibliothèque
+          </button>
+        </div>
+  
+        <div class="book-main">
+          <div class="book-image">
+            <img src="assets/images/default-book.jpg" [alt]="audioBook.titre">
+          </div>
+  
+          <div class="book-info">
+            <h1>{{ audioBook.titre }}</h1>
+            
+            <div class="book-metadata">
+              @if (audioBook.duree) {
+                <p class="duration">Durée: {{ audioBook.duree }} secondes</p>
+              }
+            </div>
+  
+            @if (audioBook.description) {
+              <div class="book-description">
+                <h2>Description</h2>
+                <p>{{ audioBook.description }}</p>
+              </div>
+            }
+  
+            <div class="action-buttons">
+              <button class="play-button">
+                🎧 Écouter
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div class="loading">
+        Chargement du livre audio...
+      </div>
+    }
+  </div>

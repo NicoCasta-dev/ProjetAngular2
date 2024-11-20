@@ -1,0 +1,53 @@
+<div class="header">
+  <h1>Lisez n'importe quel livre en <span class="highlighted">10 minutes</span></h1>
+  <p class="p1">Les meilleurs livres de dev perso résumés,</p>
+  <p class="p2">à écouter gratuitement et sans limite de temps !</p>
+  <form class="d-flex" role="search">
+    <input 
+    class="form-control search-bar me-2" 
+    type="search" 
+    name="searchQuery"
+    placeholder="Rechercher un livre audio..." 
+    aria-label="Search" 
+    [(ngModel)]="searchQuery" 
+    (input)="searchBooks()"
+    >
+  </form>
+
+  @if (filteredAudiotheque.length > 0) {
+    <div class="search-suggestions">
+      @for (book of filteredAudiotheque; track book.id) {
+        
+        <div class="search-suggestions-item">
+          <a [routerLink]="['/livres_audio', book.id]">
+            {{ book.titre }}
+          </a>
+        </div>
+      }
+    </div>
+  } 
+
+<div class="audiotheque-container">
+  @if (loading) {
+    <div class="loading">
+      Chargement de votre bibliothèque...
+    </div>
+  }
+
+  @if (!loading) {
+    <div class="audio-grid">
+      @for (audio of audiotheque; track $index) {
+        <div class="audio-card">
+          <a [routerLink]="['/livres_audio', audio.id]">
+            <div class="audio-image">
+              <img src="assets/images/default-book.jpg" alt="{{audio.titre}}">
+            </div>
+          </a>
+          <div class="audio-info">
+            <h2>{{ audio.titre }}</h2>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
