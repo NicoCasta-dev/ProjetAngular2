@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediathequeService } from '../services/mediatheque.service';
 import { Audiotheque } from '../models/audiotheque';
@@ -8,7 +8,7 @@ import { Audiotheque } from '../models/audiotheque';
   templateUrl: './book-detail.component.html',
   styleUrl: './book-detail.component.scss'
 })
-export class BookDetailComponent {
+export class BookDetailComponent implements OnInit{
   audioBook: Audiotheque | null = null;
 
   constructor(
@@ -18,6 +18,10 @@ export class BookDetailComponent {
   ) {}
 
   ngOnInit(): void {
+    console.log('Composant chargé !')
+    console.log(this.route.snapshot.paramMap)
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log(id)
     this.getAudioBookDetails();
   }
 

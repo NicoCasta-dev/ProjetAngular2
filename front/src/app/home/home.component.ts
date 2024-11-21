@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Audiotheque } from '../models/audiotheque';
 import { MediathequeService } from '../services/mediatheque.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,9 @@ export class HomeComponent implements OnInit{
   error = '';
   searchQuery: string = '';
 
-  constructor(private mediathequeService: MediathequeService) {}
+  constructor(
+    private mediathequeService: MediathequeService, 
+    public readonly router: Router) {}
 
   ngOnInit(): void {
     this.loadAudiotheque();

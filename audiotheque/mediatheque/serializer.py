@@ -23,7 +23,7 @@ class LivreAudioListSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = LivreAudio
-        fields = [ 'titre', 'auteur', 'url' ]
+        fields = [ 'id', 'titre', 'auteur', 'url' ]
 
 class LivreAudioDetailSerializer(serializers.HyperlinkedModelSerializer):
 

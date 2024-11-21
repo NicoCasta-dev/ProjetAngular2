@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch } fro
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { InterceptorService } from './services/interceptor.service';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { InterceptorService } from './services/interceptor.service';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
   ],
   providers: [
     provideClientHydration(),

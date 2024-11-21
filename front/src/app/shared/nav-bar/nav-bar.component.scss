@@ -43,10 +43,22 @@
 .nav-bar.login {
     display: flex;
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .nav-bar.login a {
+    color: #333;
+    text-decoration: none; 
+    font-size: 1.2rem; 
+    font-weight: bold;
+    cursor: pointer; 
+}
+
+.nav-bar.register {
+    margin-right: 5px;
+}
+
+.nav-bar.register a {
     color: #333;
     text-decoration: none; 
     font-size: 1.2rem; 
