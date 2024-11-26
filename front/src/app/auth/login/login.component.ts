@@ -11,34 +11,39 @@ import { SessionService } from '../../services/session.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  loginForm : FormGroup;
+  loginForm: FormGroup;
+  serverErrorMessage: string | null = null;
 
-  constructor(
-    private _formBuilder: FormBuilder,
-    private _router: Router,
-    private _auth: AuthService,
-    private _session: SessionService
-  ) {
-    this.loginForm = this._formBuilder.group({
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private session : SessionService) {
+    this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
-  onSubmit(): void {
-    if(this.loginForm.invalid) {
+  onSubmit() {
+    if (this.loginForm.invalid) {
       return;
     }
 
-    this._auth.login(this.loginForm.value).subscribe({
-      next: (reponse) => {
-        console.log(reponse);
-        this._session.setToken(reponse.token);
-        console.log('Connexion réussie');
-        this._router.navigate(['/accueil']);
+    // Réinitialisation du message d'erreur à chaque tentative
+    this.serverErrorMessage = null;
+
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (response) => {
+        this.session.setToken(response.access);
+        console.log('Connexion réussie', response);
+        this.router.navigate(['/home'])
       },
       error: (error) => {
-        console.log(error);
+        // Gestion de l'erreur en fonction de la réponse de l'API
+        if (error.status === 401) {
+          this.serverErrorMessage = "Nom d'utilisateur ou mot de passe incorrect.";
+        } else if (error.status === 400) {
+          this.serverErrorMessage = "Veuillez vérifier vos informations.";
+        } else {
+          this.serverErrorMessage = "Une erreur est survenue. Veuillez réessayer.";
+        }
       }
     });
   }

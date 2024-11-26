@@ -17,6 +17,7 @@ export class SessionService {
   }
 
   setToken(token: string): void {
+    console.log('setToken', token)
     if (this.storageDispo()) {
       localStorage.setItem(this.TOKEN_KEY, token)
       this.authStatus.set(true)

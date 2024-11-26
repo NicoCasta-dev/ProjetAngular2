@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { SessionService } from '../../services/session.service';
 import { Utilisateur } from '../../models/utilisateur.model';
+import { first, last } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,8 @@ import { Utilisateur } from '../../models/utilisateur.model';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  serverErrorMessage: string | null = null;
+
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -20,14 +23,19 @@ export class RegisterComponent {
     private _session: SessionService
   ) {
     this.registerForm = this._formBuilder.group({
-      nom: ['', [
+      last_name: ['', [
         Validators.required, 
         Validators.minLength(2), 
         Validators.maxLength(50)
       ]],
-      prenom: ['', [
+      first_name: ['', [
         Validators.required, 
         Validators.minLength(2), 
+        Validators.maxLength(50)
+      ]],
+      username: ['', [
+        Validators.required,
+        Validators.minLength(2),
         Validators.maxLength(50)
       ]],
       email: ['', [
@@ -38,7 +46,10 @@ export class RegisterComponent {
         Validators.required, 
         Validators.minLength(8)
       ]],
-      avatar: [''] // Optionnel
+      password_confirm: ['', [
+        Validators.required, 
+        Validators.minLength(8)
+      ]],
     });
   }
 
@@ -46,21 +57,15 @@ export class RegisterComponent {
     if(this.registerForm.invalid) {
       return;
     }
+    this.serverErrorMessage = null;
 
-    const utilisateur: Utilisateur = this.registerForm.value;
-
-    this._auth.register(utilisateur).subscribe({
-      next: (reponse: any) => {
-        console.log('Utilisateur enregistré', reponse);
-        // Vérif si  backend renvoie un token lors de l'inscription
-        if (reponse.token) {
-          this._session.setToken(reponse.token);
-        }
-        console.log('Inscription réussie');
+    this._auth.register(this.registerForm.value).subscribe({
+      next: (response) => {
+        console.log('Inscription réussie', response);
         this._router.navigate(['/accueil']);
       },
-      error: (error: any) => {
-        console.error('Erreur d\'inscription', error);
+      error: (error) => {
+        console.log(error)
       }
     });
   }

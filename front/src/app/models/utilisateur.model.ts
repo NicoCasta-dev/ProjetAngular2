@@ -1,7 +1,8 @@
 export interface Utilisateur{
-    nom: string;
-    prenom: string;
+    last_name: string;
+    first_name: string;
+    username: string;
     email: string;
-    avatar?: string;
-    password: string;
+    password?: string;
+    password_confirm?: string;
 }
