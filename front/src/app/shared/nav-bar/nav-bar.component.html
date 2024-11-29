@@ -1,7 +1,7 @@
 <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
         <a routerLink="/home">
-            <img src="assets/images/Logo.svg" alt="Logo" class="img">
+            <img [src]="logo" alt="Logo" class="img">
         </a>
     </div>
     <div class="nav-bar liens">
@@ -9,10 +9,18 @@
         <a routerLink="/best">Les plus écoutés</a>
         <a routerLink="new">Nouveautés</a>
     </div>
-    <div class="nav-bar login">
-        <a routerLink="/login">Se connecter</a>
-    </div>
-    <div class="nav-bar register">
-        <a routerLink="/register">S'inscrire</a>
-    </div>
+    <ng-container *ngIf="!isLoggedIn; else userConnected">
+        <div class="nav-bar login">
+            <a routerLink="/login">Se connecter</a>
+        </div>
+        <div class="nav-bar register">
+            <a routerLink="/register">S'inscrire</a>
+        </div>
+    </ng-container>
+    <ng-template #userConnected>
+        <div class="nav-bar user-info">
+            <span>Youhouuu 👋</span>
+            <a (click)="logout()" class="logout-link">Se déconnecter</a>
+        </div>
+    </ng-template>
 </nav>

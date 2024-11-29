@@ -32,6 +32,9 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         this.session.setToken(response.access);
+        if (response.user) {
+          localStorage.setItem('userData', JSON.stringify(response.user));
+        }
         console.log('Connexion réussie', response);
         this.router.navigate(['/home'])
       },
