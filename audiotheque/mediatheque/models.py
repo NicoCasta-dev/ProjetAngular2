@@ -15,6 +15,7 @@ class LivreAudio(models.Model):
     description = models.TextField()
     duree = models.IntegerField() # en secondes
     chemin_fichier = models.FileField(upload_to='livres_audio/')
+    image = models.ImageField(upload_to='livres_audio/', null=True, blank=True)
 
     def __str__(self):
         return f'{self.titre} {self.auteur} {self.description} {self.duree}'

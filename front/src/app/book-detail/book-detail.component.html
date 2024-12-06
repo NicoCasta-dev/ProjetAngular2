@@ -9,7 +9,11 @@
   
         <div class="book-main">
           <div class="book-image">
-            <img src="assets/images/default-book.jpg" [alt]="audioBook.titre">
+            @if (audioBook.image) {
+              <img [src]="audioBook.image" [alt]="audioBook.titre">
+            } @else {
+              <img src="assets/images/default-book.jpg" [alt]="audioBook.titre">
+            }
           </div>
   
           <div class="book-info">
@@ -17,7 +21,7 @@
             
             <div class="book-metadata">
               @if (audioBook.duree) {
-                <p class="duration">Durée: {{ audioBook.duree }} secondes</p>
+                <p class="duration">Durée: {{ audioBook.duree }} minutes</p>
               }
             </div>
   

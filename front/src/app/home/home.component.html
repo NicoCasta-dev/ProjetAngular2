@@ -40,7 +40,11 @@
         <div class="audio-card">
           <a [routerLink]="['/livres_audio', audio.id]">
             <div class="audio-image">
-              <img src="assets/images/default-book.jpg" alt="{{audio.titre}}">
+              @if (audio.image) {
+                <img [src]="audio.image" [alt]="audio.titre">
+              } @else {
+                <img src="assets/images/default-book.jpg" [alt]="audio.titre">
+              }
             </div>
           </a>
           <div class="audio-info">
