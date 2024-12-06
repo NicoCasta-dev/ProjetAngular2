@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediathequeService } from '../services/mediatheque.service';
 import { Audiotheque } from '../models/audiotheque';
@@ -10,6 +10,8 @@ import { Audiotheque } from '../models/audiotheque';
 })
 export class BookDetailComponent implements OnInit{
   audioBook: Audiotheque | null = null;
+  @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
+  isPlaying: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,5 +48,25 @@ export class BookDetailComponent implements OnInit{
 
   navigateToList(): void {
     this.router.navigate(['/home']);
+  }
+
+  togglePlay(): void {
+    if (!this.audioPlayer) return;
+
+    const audio = this.audioPlayer.nativeElement;
+
+    if (this.isPlaying) {
+      audio.pause();
+    } else {
+      audio.play().catch(error => {
+        console.error('Erreur lors de la lecture:', error);
+      });
+    }
+
+    this.isPlaying = !this.isPlaying;
+  }
+
+  onAuduiEnded(): void {
+    this.isPlaying = false;
   }
 }

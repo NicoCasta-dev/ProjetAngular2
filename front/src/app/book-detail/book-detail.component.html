@@ -33,10 +33,12 @@
             }
   
             <div class="action-buttons">
-              <button class="play-button">
-                🎧 Écouter
+              <button class="play-button" (click)="togglePlay()" >
+                🎧 {{ isPlaying ? 'Pause' : 'Écouter' }}
               </button>
             </div>
+
+            <audio #audioPlayer [src]="audioBook.chemin_fichier"></audio>
           </div>
         </div>
       </div>
