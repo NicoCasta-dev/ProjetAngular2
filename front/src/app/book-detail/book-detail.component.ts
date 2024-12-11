@@ -66,7 +66,7 @@ export class BookDetailComponent implements OnInit{
     this.isPlaying = !this.isPlaying;
   }
 
-  onAuduiEnded(): void {
+  onAudioEnded(): void {
     this.isPlaying = false;
   }
 }

@@ -41,9 +41,10 @@ export class HomeComponent implements OnInit{
 
   searchBooks(): void {
     if (this.searchQuery.trim() === '') {
-      this.filteredAudiotheque = this.audiotheque;
+      this.filteredAudiotheque = [];
     } else {
       this.filteredAudiotheque = this.audiotheque.filter((book) => {
+        console
         return book.titre.toLowerCase().includes(this.searchQuery.toLowerCase());
       });
     }

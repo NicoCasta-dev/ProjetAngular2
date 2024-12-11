@@ -38,7 +38,7 @@
               </button>
             </div>
 
-            <audio #audioPlayer [src]="audioBook.chemin_fichier"></audio>
+            <audio #audioPlayer [src]="audioBook.chemin_fichier" (ended)="onAudioEnded()"></audio>
           </div>
         </div>
       </div>
